@@ -61,7 +61,7 @@ def update_the_json(pecha: Pecha):
     commentary_json["source"]["books"][0]["content"][0] = new_content
     write_json(Path(f"{pecha.pecha_path}/{pecha_id}.json"), commentary_json)
     upload_commentary(Path(f"{pecha.pecha_path}/{pecha_id}.json"), Destination_url.PRODUCTION, overwrite=True)
-    update_repo(pecha.id)
+    update_repo(pecha.pecha_path.__str__())
     
 
 
