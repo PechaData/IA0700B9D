@@ -28,9 +28,8 @@ jobs:
         python .github/workflows/scripts.py
     - name: Push the Changes
       run: |
-        git checkout pecha_json
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+        git config user.name ta4tsering
+        git config user.email ta3tsering@gmail.com
         git add .
         git commit -m "added updated serialized json"
         git push
