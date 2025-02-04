@@ -52,7 +52,7 @@ def update_the_json(pecha: Pecha):
     commentary_json["source"]["books"][0]["content"][0] = new_content
     write_json(Path(f"{pecha.pecha_path}/{pecha_id}.json"), commentary_json)
     upload_commentary(Path(f"{pecha.pecha_path}/{pecha_id}.json"), Destination_url.PRODUCTION, overwrite=True)
-    commit(repo_path=pecha.pecha_path, message=f"pecha update", not_includes=None, branch="pecha_json")
+    # commit(repo_path=pecha.pecha_path, message=f"pecha update", not_includes=None, branch="pecha_json")
     
 
 
