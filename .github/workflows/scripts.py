@@ -43,7 +43,7 @@ def insert_text_after_tag(text, new_text):
 
 def update_repo(repo_path):
     local_repo = Repo(repo_path)
-    commit_and_push(repo=local_repo, branch="pecha_json")
+    commit_and_push(repo=local_repo, message="updated with new serizlized json", branch="pecha_json")
 
 
 def update_the_json(pecha: Pecha):
