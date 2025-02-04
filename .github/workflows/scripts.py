@@ -5,8 +5,12 @@ from openpecha.pecha import Pecha
 import subprocess
 from openpecha.utils import read_json, write_json
 import re
+import os
 from openpecha.github_utils import commit
+from git import Repo
+from openpecha.storages import commit_and_push
 
+Github_token = os.getenv("GITHUB_TOKEN")
 
 def get_pecha_json(pecha: Pecha):
     pecha_id = pecha.id
@@ -35,7 +39,12 @@ def insert_text_after_tag(text, new_text):
     updated_text = match.group(1) + new_text
     updated_text = updated_text.replace("$", "\n")
     return updated_text
-    
+
+
+def update_repo(repo_path):
+    local_repo = Repo(repo_path)
+    commit_and_push(repo=local_repo, branch="pecha_json")
+
 
 def update_the_json(pecha: Pecha):
     new_content = []
@@ -52,7 +61,7 @@ def update_the_json(pecha: Pecha):
     commentary_json["source"]["books"][0]["content"][0] = new_content
     write_json(Path(f"{pecha.pecha_path}/{pecha_id}.json"), commentary_json)
     upload_commentary(Path(f"{pecha.pecha_path}/{pecha_id}.json"), Destination_url.PRODUCTION, overwrite=True)
-    # commit(repo_path=pecha.pecha_path, message=f"pecha update", not_includes=None, branch="pecha_json")
+    update_repo(pecha.pecha_id)
     
 
 
